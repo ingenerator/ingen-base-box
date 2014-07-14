@@ -32,4 +32,4 @@ trap 'error_handler' ERR
 apt-get update 
 apt-get install -y openjdk-6-jre openjdk-6-jdk
 mkdir -p /var/jenkins/workspace
-chown -R ubuntu:ubuntu var/jenkins
+chown -R ubuntu:ubuntu /var/jenkins
