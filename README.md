@@ -54,6 +54,9 @@ wget https://github.com/ingenerator/ingen-base-box/archive/master.tar.gz
 tar -xvf master.tar.gz
 cd ingen-base-box-master
 sudo ./bootstrap-instance.sh
+
+# If building for use as a Jenkins slave
+sudo ./bootstrap-jenkins-slave.sh
 ```
 
 Build an AMI from the instance.
