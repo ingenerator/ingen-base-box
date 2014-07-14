@@ -45,8 +45,15 @@ Go to vagrant cloud and create the new box version, entering the virtualbox prov
 
 ### To build as an Amazon AMI (NB - this is NOT a vagrant box for the vagrant-aws plugin)
 
-* Create an EC2 instance and SSH in
-* Grab these provisioning scripts
-* `bootstrap-instance.sh`
-* Build an AMI from the instance
+Spin up a new instance from the appropriate Ubuntu 12.04 x64 cloud AMI - see the list at http://cloud-images.ubuntu.com/locator/ec2/
+[ami-19d80d63 for eu-west currently](https://console.aws.amazon.com/ec2/home?region=eu-west-1#launchAmi=ami-19d80d6e])
 
+```bash
+cd /tmp
+wget https://github.com/ingenerator/ingen-base-box/archive/master.tar.gz
+tar -xvf master.tar.gz
+cd ingen-base-box-master
+sudo ./bootstrap-instance.sh
+```
+
+Build an AMI from the instance.
