@@ -2,3 +2,5 @@
 Thumbs.db
 thumbs.db
 .boxes
+*.box
+secret_vars.json
