@@ -3,60 +3,48 @@
 Simple builder for customised vagrant base box, bootstrapped
 with Chef and Berkshelf and very little else.
 
-Currently, our boxes are all based on Ubuntu 12.04.
+The boxes are built with [packer](https://www.packer.io/) to simplify provisioning of 
+near-identical images from a common provisioning script.
 
-This is a quick fix solution, we are planning to move to 
-Packer in the near future.
+### To build boxes
 
-### To build as a vagrant virtualbox
+First, install packer (and virtualbox if you want to build vagrant boxes) following the 
+instructions.
 
-#### Install guest additions
-Ensure you have the `vagrant-vbguest` plugin installed, this will bring your
-Guest Additions up to date automatically when you build the box. This presumes
-that end-users will also be using the same or later virtualbox release, or that
-they also install vagrant-vbguest.
+You will need some secret credentials, including an AWS access key and secret key. Drop a
+secret_vars.json in the working directory, that looks like this:
 
-#### Rebuild the machine
-Build the machine from scratch to be sure there's nothing hanging around from an
-SSH session etc.
+```json
+{
+  "aws_access_key": "YOUR ACCESS KEY HERE",
+  "aws_secret_key": "YOUR SECRET KEY HERE",
+  "vagrant_cloud_token": "YOUR VAGRANT CLOUD TOKEN HERE"
+}
+```
+
+The virtualbox base boxes are built on top of the `hashicorp/precise64` and `ubuntu/trusty64`
+vagrant images. You will therefore need to install these locally before you can build on them.
 
 ```shell
-vagrant destroy
-vagrant up
+vagrant box add hashicorp/precise64
+vagrant box add ubuntu/trusty64
 ```
 
-#### Get the virtualbox machine name
-This will be something like `ingen-base-box_default_14051231231232_1232`. 
-You can find this by looking in the virtualbox manager, or by running 
-`vboxmanage listvms`.
-
-#### Package the box
+Then to build all the boxes:
 
 ```shell
-$VERSION=0.1.0 # or whatever the next number is
-vagrant package --base $VIRTUALBOX_MACHINE_NAME --output .boxes/ingen-base-precise64.$VERSION.virtualbox.box
+packer build --var "version=$VERSION" --var-file=secret_vars.json packer.json"
 ```
 
-#### Upload the packaged box
-Upload the box to boxes.ingenerator.com, placing it in /var/www/boxes.ingenerator.com/ingen-base/
+To build a specific image, specify the name(s) in the --only parameter:
 
-#### Create the box version on Vagrant cloud
-Go to vagrant cloud and create the new box version, entering the virtualbox provider URL
-
-### To build as an Amazon AMI (NB - this is NOT a vagrant box for the vagrant-aws plugin)
-
-Spin up a new instance from the appropriate Ubuntu 12.04 x64 cloud AMI - see the list at http://cloud-images.ubuntu.com/locator/ec2/
-[ami-19d80d63 for eu-west currently](https://console.aws.amazon.com/ec2/home?region=eu-west-1#launchAmi=ami-19d80d6e])
-
-```bash
-cd /tmp
-wget https://github.com/ingenerator/ingen-base-box/archive/master.tar.gz
-tar -xvf master.tar.gz
-cd ingen-base-box-master
-sudo ./bootstrap-instance.sh
-
-# If building for use as a Jenkins slave
-sudo ./bootstrap-jenkins-slave.sh
+```shell
+packer build --var "version=$VERSION" --var-file=secret_vars.json --only=ingen-jenkins-trusty64 packer.json"
 ```
 
-Build an AMI from the instance.
+### Uploading packaged vagrant boxes
+
+The vagrant-cloud post-processor is broken at the moment so uploading the packaged box to
+vagrant cloud is a manual step. Log in to https://atlas.hashicorp.com and use the web interface
+to locate the appropriate ingenerator box, create a new version and upload the box file that 
+packer will have created in your working directory.
