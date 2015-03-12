@@ -34,6 +34,7 @@ trap 'error_handler' ERR
 # ------------------------------------------------------------------------------
 # Setup
 # ------------------------------------------------------------------------------
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Rubydoc really slows down gem install, and throws lots of warnings, and we don't need it
 echo "Disabling all rubydoc by default"
@@ -47,7 +48,8 @@ echo "Installing basic native packages"
 # includes native libraries required by gems to save compiling them locally
 # libxslt-dev and libxml2-dev are for nokogiri
 # libgecode30 is for dep-selector-gecode
-sudo apt-get install -y -q build-essential curl git ruby1.9.3 libxslt-dev libxml2-dev libgecode30 libgecode-dev
+sudo apt-get install -y -q build-essential curl git ruby1.9.3 libxslt-dev libxml2-dev
+sudo "$DIR/install-gecode30.sh"
 
 # ------------------------------------------------------------------------------
 # Chef
@@ -69,7 +71,6 @@ sudo /opt/chef/embedded/bin/gem install --no-rdoc --no-ri knife-solo_data_bag
 echo "Installing bundler"
 sudo gem install bundler
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 echo "Installing gems from gemfile in $DIR"
 cd $DIR
 USE_SYSTEM_GECODE=1 bundle install
