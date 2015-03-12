@@ -1,0 +1,93 @@
+{
+  "description": "Builds images from the ingen-base-box template to use as base images for further customisation",
+  "variables": {
+    "vagrant_box_path":    "{{env `HOMEDRIVE`}}{{env `HOMEPATH`}}/.vagrant.d/boxes",
+    "vagrant_cloud_token": null,
+    "version":             null
+  },
+  "builders": [
+    {
+      "name": "ingen-base-precise64",
+      "type": "virtualbox-ovf",
+      "source_path": "{{user `vagrant_box_path`}}/hashicorp-VAGRANTSLASH-precise64/1.1.0/virtualbox/box.ovf",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_wait_timeout": "30s",
+      "shutdown_command": "echo 'packer' | sudo -S shutdown -P now"
+    },
+    {
+      "name": "ingen-base-trusty64",
+      "type": "virtualbox-ovf",
+      "source_path": "{{user `vagrant_box_path`}}/ubuntu-VAGRANTSLASH-trusty64/14.04/virtualbox/box.ovf",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_wait_timeout": "30s",
+      "shutdown_command": "echo 'packer' | sudo -S shutdown -P now"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "provisioning",
+      "destination": "/tmp"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "cd /tmp/provisioning",
+        "ls -l",
+        "chmod +x *.sh",
+        "sudo ./bootstrap-instance.sh",
+        "sudo ./cleanup-ubuntu.sh"
+      ]
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "sudo /tmp/provisioning/minimize.sh"
+      ],
+      "only": [
+        "ingen-base-precise64",
+        "ingen-base-trusty64"
+      ]
+    }
+  ],
+  "post-processors": [
+    [
+      {
+        "type": "vagrant",
+        "output": "{{.BuildName}}.{{user `version`}}.{{.Provider}}.box",
+        "only": [
+          "ingen-base-precise64"
+        ]
+      },
+      {
+        "type": "vagrant-cloud",
+        "box_tag": "ingenerator/base-precise64",
+        "access_token": "{{user `vagrant_cloud_token`}}",
+        "version": "{{user `version`}}",
+        "only": [
+          "ingen-base-precise64"
+        ]
+      }
+    ],
+    [
+      {
+        "type": "vagrant",
+        "output": "{{.BuildName}}.{{user `version`}}.{{.Provider}}.box",
+        "only": [
+          "ingen-base-trusty64"
+        ]
+      },
+      {
+        "type": "vagrant-cloud",
+        "box_tag": "ingenerator/base-trusty64",
+        "access_token": "{{user `vagrant_cloud_token`}}",
+        "version": "{{user `version`}}",
+        "only": [
+          "ingen-base-trusty64"
+        ]
+      }
+    ]
+  ]
+}
