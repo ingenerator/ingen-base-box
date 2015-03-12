@@ -60,30 +60,12 @@
         "only": [
           "ingen-base-precise64"
         ]
-      },
-      {
-        "type": "vagrant-cloud",
-        "box_tag": "ingenerator/base-precise64",
-        "access_token": "{{user `vagrant_cloud_token`}}",
-        "version": "{{user `version`}}",
-        "only": [
-          "ingen-base-precise64"
-        ]
       }
     ],
     [
       {
         "type": "vagrant",
         "output": "{{.BuildName}}.{{user `version`}}.{{.Provider}}.box",
-        "only": [
-          "ingen-base-trusty64"
-        ]
-      },
-      {
-        "type": "vagrant-cloud",
-        "box_tag": "ingenerator/base-trusty64",
-        "access_token": "{{user `vagrant_cloud_token`}}",
-        "version": "{{user `version`}}",
         "only": [
           "ingen-base-trusty64"
         ]
