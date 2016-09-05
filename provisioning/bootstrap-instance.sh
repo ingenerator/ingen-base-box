@@ -16,7 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require_chef_version="12.1.1"
+require_chef_version="12.13.37"
 
 # ------------------------------------------------------------------------------
 # Error handlers
