@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
   Vagrant.require_version ">= 1.5.0"
   
   # Configure the base box - will be sourced from vagrant cloud
-  config.vm.box = "hashicorp/precise64"
+  config.vm.box = "ubuntu/trusty64"
   
   # Common configuration for virtualbox
   # Based on the performance enhancements for ubuntu in http://blog.jdpfu.com/2012/09/14/solution-for-slow-ubuntu-in-virtualbox
@@ -31,8 +31,8 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder ".", "/vagrant"
   
   # And run our bootstrapping shell scripts
-  config.vm.provision :shell, :path => 'bootstrap-instance.sh'
-  config.vm.provision :shell, :path => 'cleanup-ubuntu.sh'
-  config.vm.provision :shell, :path => 'minimize.sh'
+  config.vm.provision :shell, :path => 'provisioning/bootstrap-instance.sh'
+  config.vm.provision :shell, :path => 'provisioning/cleanup-ubuntu.sh'
+  config.vm.provision :shell, :path => 'provisioning/minimize.sh'
   
 end
