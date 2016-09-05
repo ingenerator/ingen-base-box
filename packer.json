@@ -55,7 +55,8 @@
       "image":"ubuntu-14-04-x64",
       "region": "lon1",
       "size":"512mb",
-      "snapshot_name": "ingen-base-trusty64-{{isotime \"2006-01-02T15-04-05MST\"}}"
+      "snapshot_name": "ingen-base-trusty64-{{isotime \"2006-01-02T15-04-05MST\"}}",
+      "state_timeout": "10m"
     }
   ],
   "provisioners": [
