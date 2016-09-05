@@ -81,7 +81,6 @@
         "sudo ./bootstrap-jenkins-slave.sh"
       ],
       "only": [
-        "ingen-jenkins-precise64",
         "ingen-jenkins-trusty64"
       ]
     },
@@ -91,21 +90,11 @@
         "sudo /tmp/provisioning/minimize.sh"
       ],
       "only": [
-        "ingen-base-precise64",
         "ingen-base-trusty64"
       ]
     }
   ],
   "post-processors": [
-    [
-      {
-        "type": "vagrant",
-        "output": "{{.BuildName}}.{{user `version`}}.{{.Provider}}.box",
-        "only": [
-          "ingen-base-precise64"
-        ]
-      }
-    ],
     [
       {
         "type": "vagrant",
