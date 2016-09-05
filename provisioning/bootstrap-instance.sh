@@ -48,7 +48,14 @@ echo "Installing basic native packages"
 # includes native libraries required by gems to save compiling them locally
 # libxslt-dev and libxml2-dev are for nokogiri
 # libgecode30 is for dep-selector-gecode
-sudo apt-get install -y -q build-essential curl git ruby1.9.3 libxslt-dev libxml2-dev
+sudo apt-get install -y -q build-essential curl git libxslt-dev libxml2-dev software-properties-common
+
+echo "Installing ruby"
+sudo apt-add-repository ppa:brightbox/ruby-ng -y
+sudo apt-get update
+sudo apt-get install -y -q ruby2.3 ruby2.3-dev
+
+echo "Installing gecode"
 sudo "$DIR/install-gecode30.sh"
 
 # ------------------------------------------------------------------------------
