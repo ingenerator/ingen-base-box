@@ -67,6 +67,16 @@
     {
       "type": "shell",
       "inline": [
+        "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting for cloud-init...'; sleep 1; done"
+      ],
+      "only": [
+        "ingen-base-trusty64-ami",
+        "ingen-jenkins-trusty64"
+      ]
+    },
+    {
+      "type": "shell",
+      "inline": [
         "cd /tmp/provisioning",
         "ls -l",
         "chmod +x *.sh",
