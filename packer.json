@@ -3,25 +3,12 @@
   "variables": {
     "aws_access_key": "",
     "aws_secret_key": "",
-    "source_ami_precise64": "ami-6fcb5a18",
     "source_ami_trusty64": "ami-234ecc54",
     "vagrant_box_path": "{{env `HOMEDRIVE`}}{{env `HOMEPATH`}}/.vagrant.d/boxes",
     "vagrant_cloud_token": null,
     "version": null
   },
   "builders": [
-    {
-      "name": "ingen-base-precise64",
-      "type": "virtualbox-ovf",
-      "source_path": "{{user `vagrant_box_path`}}/hashicorp-VAGRANTSLASH-precise64/1.1.0/virtualbox/box.ovf",
-      "ssh_username": "vagrant",
-      "ssh_password": "vagrant",
-      "ssh_wait_timeout": "30s",
-      "shutdown_command": "echo 'packer' | sudo -S shutdown -P now",
-      "vboxmanage": [
-        ["modifyvm", "{{.Name}}", "--memory", "1024"]
-      ]
-    },
     {
       "name": "ingen-base-trusty64",
       "type": "virtualbox-ovf",
@@ -33,19 +20,6 @@
       "vboxmanage": [
         ["modifyvm", "{{.Name}}", "--memory", "1024"]
       ]
-    },
-    {
-      "name": "ingen-jenkins-precise64",
-      "type": "amazon-ebs",
-      "access_key": "{{user `aws_access_key`}}",
-      "secret_key": "{{user `aws_secret_key`}}",
-      "ami_name": "ingen-base-precise64-jenkins-slave-{{isotime \"2006-01-02T15-04-05MST\"}}",
-      "ami_description": "Precise64 Jenkins slave configured with https://github.com/ingenerator/ingen-base",
-      "instance_type": "t2.small",
-      "region": "eu-west-1",
-      "source_ami": "{{user `source_ami_precise64`}}",
-      "ssh_username": "ubuntu",
-      "ami_users": ["067402664595"]
     },
     {
       "name": "ingen-jenkins-trusty64",
