@@ -30,6 +30,6 @@ function error_handler()
 trap 'error_handler' ERR
 
 apt-get update 
-apt-get install -y openjdk-6-jre openjdk-6-jdk
+apt-get install -y openjdk-7-jre openjdk-7-jdk
 mkdir -p /var/jenkins/workspace
 chown -R ubuntu:ubuntu /var/jenkins
