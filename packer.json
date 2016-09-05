@@ -3,7 +3,7 @@
   "variables": {
     "aws_access_key": "",
     "aws_secret_key": "",
-    "source_ami_trusty64": "ami-234ecc54",
+    "source_ami_trusty64": "ami-a7412ad4",
     "vagrant_box_path": "{{env `HOMEDRIVE`}}{{env `HOMEPATH`}}/.vagrant.d/boxes",
     "vagrant_cloud_token": null,
     "version": null
