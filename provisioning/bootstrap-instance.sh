@@ -45,7 +45,7 @@ echo "Updating apt cache"
 sudo apt-get update
 
 echo "Updating base distribution packages"
-sudo apt-get upgrade
+sudo apt-get upgrade -y
 
 echo "Installing basic native packages"
 # includes native libraries required by gems to save compiling them locally
