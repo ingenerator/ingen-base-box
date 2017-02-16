@@ -44,6 +44,9 @@ sudo mv /tmp/gemrc /etc/gemrc
 echo "Updating apt cache"
 sudo apt-get update
 
+echo "Updating base distribution packages"
+sudo apt-get upgrade
+
 echo "Installing basic native packages"
 # includes native libraries required by gems to save compiling them locally
 # libxslt-dev and libxml2-dev are for nokogiri
@@ -63,7 +66,7 @@ sudo chmod +x /tmp/chef-install.sh
 sudo /tmp/chef-install.sh -v $require_chef_version
 
 # ------------------------------------------------------------------------------
-# Chef and knife plugins 
+# Chef and knife plugins
 # ------------------------------------------------------------------------------
 echo "Installing Chef and knife plugins"
 sudo /opt/chef/embedded/bin/gem install --no-rdoc --no-ri knife-solo_data_bag
