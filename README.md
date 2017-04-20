@@ -71,7 +71,7 @@ Then:
 ```bash
 mkdir -p /var/www/www-source
 cd /var/www/www-source
-git clone https://$BOT_USER_TOKEN:x-oauth-basic@github.com/$GITHUB_ORG/$GITHUB_PROJECT_REPO
+git clone https://$BOT_USER_TOKEN:x-oauth-basic@github.com/$GITHUB_ORG/$GITHUB_PROJECT_REPO .
 mkdir -p /var/chef-solo/secrets
 touch /var/chef-solo/secrets/$PROJECT_NAME.secret.key
 chmod 0600 /var/chef-solo/secrets/$PROJECT_NAME.secret.key
