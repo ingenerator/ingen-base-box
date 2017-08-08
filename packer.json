@@ -4,7 +4,7 @@
     "aws_access_key": "",
     "aws_secret_key": "",
     "digitalocean_token": "",
-    "source_ami_trusty64": "ami-3ffca759",
+    "source_ami_trusty64": "ami-d16c9aa8",
     "_source_ami_readme": "https://cloud-images.ubuntu.com/locator/ec2/ search for eu-west-1 trusty hvm:ebs",
     "vagrant_box_path": "{{env `HOMEDRIVE`}}{{env `HOMEPATH`}}/.vagrant.d/boxes",
     "vagrant_cloud_token": null,
