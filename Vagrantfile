@@ -19,7 +19,7 @@ Vagrant.configure("2") do |config|
   # Also by default don't show a GUI unless an environment variable is set
   config.vm.provider "virtualbox" do |v|
     v.gui    = ENV['VAGRANT_GUI']
-    v.memory = 512
+    v.memory = 1024
 
     # Performance enhancements from http://blog.jdpfu.com/2012/09/14/solution-for-slow-ubuntu-in-virtualbox
     v.customize ["modifyvm", :id, "--chipset", "ich9"]     # Chipset ICH9

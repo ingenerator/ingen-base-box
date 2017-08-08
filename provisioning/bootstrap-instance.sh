@@ -77,6 +77,13 @@ sudo /opt/chef/embedded/bin/gem install --no-rdoc --no-ri knife-solo_data_bag
 echo "Installing bundler"
 sudo gem install bundler
 
-echo "Installing gems from gemfile in $DIR"
-cd $DIR
-bundle install
+echo "Installing berkshelf from $DIR to /usr/lib/berkshelf"
+if [ ! -d /usr/lib/berkshelf ]; then
+  mkdir /usr/lib/berkshelf
+fi
+cp $DIR/berkshelf/* /usr/lib/berkshelf
+bundle install --gemfile=/usr/lib/berkshelf/Gemfile --deployment --binstubs
+ln -s /usr/lib/berkshelf/bin/berks /usr/bin/berks
+
+INSTALLED_BERKS_VER=`berks --version`
+echo "Berkshelf installed : version $INSTALLED_BERKS_VER"
