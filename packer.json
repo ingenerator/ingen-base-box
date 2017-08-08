@@ -14,7 +14,7 @@
     {
       "name": "ingen-base-trusty64",
       "type": "virtualbox-ovf",
-      "source_path": "{{user `vagrant_box_path`}}/ubuntu-VAGRANTSLASH-trusty64/14.04/virtualbox/box.ovf",
+      "source_path": "{{user `vagrant_box_path`}}/ubuntu-VAGRANTSLASH-trusty64/20170803.0.0/virtualbox/box.ovf",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
       "ssh_wait_timeout": "30s",
