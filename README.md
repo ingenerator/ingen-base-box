@@ -33,13 +33,13 @@ vagrant box add ubuntu/trusty64
 Then to build all the boxes:
 
 ```shell
-packer build --var "version=$VERSION" --var-file=secret_vars.json packer.json"
+packer build --var "version=0.5.0" --var-file=secret_vars.json packer.json"
 ```
 
 To build a specific image, specify the name(s) in the --only parameter:
 
 ```shell
-packer build --var "version=$VERSION" --var-file=secret_vars.json --only=ingen-jenkins-trusty64 packer.json"
+packer build --var "version=0.5.0" --var-file=secret_vars.json --only=ingen-jenkins-trusty64 packer.json"
 ```
 
 ### Uploading packaged vagrant boxes
