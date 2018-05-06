@@ -4,7 +4,7 @@
     "aws_access_key": "",
     "aws_secret_key": "",
     "digitalocean_token": "",
-    "source_ami_trusty64": "ami-d16c9aa8",
+    "source_ami_trusty64": "ami-ef3f1296",
     "_source_ami_readme": "https://cloud-images.ubuntu.com/locator/ec2/ search for eu-west-1 trusty hvm:ebs",
     "vagrant_box_path": "{{env `HOMEDRIVE`}}{{env `HOMEPATH`}}/.vagrant.d/boxes",
     "vagrant_cloud_token": null,
@@ -14,7 +14,7 @@
     {
       "name": "ingen-base-trusty64",
       "type": "virtualbox-ovf",
-      "source_path": "{{user `vagrant_box_path`}}/ubuntu-VAGRANTSLASH-trusty64/20170803.0.0/virtualbox/box.ovf",
+      "source_path": "{{user `vagrant_box_path`}}/ubuntu-VAGRANTSLASH-trusty64/20180430.0.0/virtualbox/box.ovf",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
       "ssh_wait_timeout": "30s",
