@@ -77,6 +77,9 @@ sudo /opt/chef/embedded/bin/gem install --no-rdoc --no-ri knife-solo_data_bag
 echo "Installing bundler"
 sudo gem install bundler
 
+echo "Installing libarchive for berkshelf"
+sudo apt-get install -y libarchive-dev
+
 echo "Installing berkshelf from $DIR to /usr/lib/berkshelf"
 if [ ! -d /usr/lib/berkshelf ]; then
   mkdir /usr/lib/berkshelf
