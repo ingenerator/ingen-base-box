@@ -29,7 +29,8 @@ function error_handler()
 }
 trap 'error_handler' ERR
 
+add-apt-repository -y ppa:openjdk-r/ppa
 apt-get update 
-apt-get install -y openjdk-7-jre openjdk-7-jdk
+apt-get install -y openjdk-8-jre openjdk-8-jdk
 mkdir -p /var/jenkins/workspace
 chown -R ubuntu:ubuntu /var/jenkins
