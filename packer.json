@@ -55,7 +55,7 @@
       "api_token": "{{user `digitalocean_token`}}",
       "image":"ubuntu-14-04-x64",
       "region": "lon1",
-      "size":"1gb",
+      "size":"s-1vcpu-1gb",
       "snapshot_name": "ingen-base-trusty64-v{{user `version`}}-{{isotime \"2006-01-02T15-04-05MST\"}}",
       "ssh_username": "root",
       "state_timeout": "10m"
