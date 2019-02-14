@@ -55,7 +55,7 @@ sudo apt-get install -y -q build-essential curl git libxslt-dev libxml2-dev soft
 echo "Installing ruby"
 sudo apt-add-repository ppa:brightbox/ruby-ng -y
 sudo apt-get update
-sudo apt-get install -y -q ruby2.3 ruby2.3-dev
+sudo apt-get install -y -q ruby2.4 ruby2.4-dev
 
 # ------------------------------------------------------------------------------
 # Chef
