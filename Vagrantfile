@@ -9,7 +9,7 @@
 
 Vagrant.configure("2") do |config|
 
-  Vagrant.require_version ">= 1.8.5"
+  Vagrant.require_version ">= 2.1"
 
   # Configure the base box - will be sourced from vagrant cloud
   config.vm.box = "ubuntu/bionic64"
