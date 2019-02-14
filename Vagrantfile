@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
   Vagrant.require_version ">= 1.8.5"
 
   # Configure the base box - will be sourced from vagrant cloud
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "ubuntu/bionic64"
 
   # Common configuration for virtualbox
   # Based on the performance enhancements for ubuntu in http://blog.jdpfu.com/2012/09/14/solution-for-slow-ubuntu-in-virtualbox

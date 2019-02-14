@@ -4,17 +4,17 @@
     "aws_access_key": "",
     "aws_secret_key": "",
     "digitalocean_token": "",
-    "source_ami_trusty64": "ami-ef3f1296",
-    "_source_ami_readme": "https://cloud-images.ubuntu.com/locator/ec2/ search for eu-west-1 trusty hvm:ebs",
+    "source_ami_bionic64": "ami-08d658f84a6d84a80",
+    "_source_ami_readme": "https://cloud-images.ubuntu.com/locator/ec2/ search for eu-west-1 bionic hvm:ebs",
     "vagrant_box_path": "{{env `HOMEDRIVE`}}{{env `HOMEPATH`}}/.vagrant.d/boxes",
     "vagrant_cloud_token": null,
     "version": null
   },
   "builders": [
     {
-      "name": "ingen-base-trusty64",
+      "name": "ingen-base-bionic64",
       "type": "virtualbox-ovf",
-      "source_path": "{{user `vagrant_box_path`}}/ubuntu-VAGRANTSLASH-trusty64/20180430.0.0/virtualbox/box.ovf",
+      "source_path": "{{user `vagrant_box_path`}}/ubuntu-VAGRANTSLASH-bionic64/20190212.1.0/virtualbox/box.ovf",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
       "ssh_wait_timeout": "30s",
@@ -24,39 +24,39 @@
       ]
     },
     {
-      "name": "ingen-jenkins-trusty64",
+      "name": "ingen-jenkins-bionic64",
       "type": "amazon-ebs",
       "access_key": "{{user `aws_access_key`}}",
       "secret_key": "{{user `aws_secret_key`}}",
-      "ami_name": "ingen-base-trusty64-jenkins-slave-v{{user `version`}}-{{isotime \"2006-01-02T15-04-05MST\"}}",
-      "ami_description": "Trusty64 Jenkins slave configured with https://github.com/ingenerator/ingen-base",
+      "ami_name": "ingen-base-bionic64-jenkins-slave-v{{user `version`}}-{{isotime \"2006-01-02T15-04-05MST\"}}",
+      "ami_description": "bionic64 Jenkins slave configured with https://github.com/ingenerator/ingen-base",
       "instance_type": "t2.large",
       "region": "eu-west-1",
-      "source_ami": "{{user `source_ami_trusty64`}}",
+      "source_ami": "{{user `source_ami_bionic64`}}",
       "ssh_username": "ubuntu",
       "ami_users": ["067402664595"]
     },
     {
-      "name": "ingen-base-trusty64-ami",
+      "name": "ingen-base-bionic64-ami",
       "type": "amazon-ebs",
       "access_key": "{{user `aws_access_key`}}",
       "secret_key": "{{user `aws_secret_key`}}",
-      "ami_name": "ingen-base-trusty64-v{{user `version`}}-{{isotime \"2006-01-02T15-04-05MST\"}}",
-      "ami_description": "Trusty64 image configured with https://github.com/ingenerator/ingen-base",
+      "ami_name": "ingen-base-bionic64-v{{user `version`}}-{{isotime \"2006-01-02T15-04-05MST\"}}",
+      "ami_description": "bionic64 image configured with https://github.com/ingenerator/ingen-base",
       "instance_type": "t2.large",
       "region": "eu-west-1",
-      "source_ami": "{{user `source_ami_trusty64`}}",
+      "source_ami": "{{user `source_ami_bionic64`}}",
       "ssh_username": "ubuntu",
       "ami_users": ["067402664595"]
     },
     {
-      "name": "ingen-base-trusty64-droplet-lon",
+      "name": "ingen-base-bionic64-droplet-lon",
       "type": "digitalocean",
       "api_token": "{{user `digitalocean_token`}}",
-      "image":"ubuntu-14-04-x64",
+      "image":"ubuntu-18-04-x64",
       "region": "lon1",
       "size":"s-1vcpu-1gb",
-      "snapshot_name": "ingen-base-trusty64-v{{user `version`}}-{{isotime \"2006-01-02T15-04-05MST\"}}",
+      "snapshot_name": "ingen-base-bionic64-v{{user `version`}}-{{isotime \"2006-01-02T15-04-05MST\"}}",
       "ssh_username": "root",
       "state_timeout": "10m"
     }
@@ -73,8 +73,8 @@
         "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting for cloud-init...'; sleep 1; done"
       ],
       "only": [
-        "ingen-base-trusty64-ami",
-        "ingen-jenkins-trusty64"
+        "ingen-base-bionic64-ami",
+        "ingen-jenkins-bionic64"
       ]
     },
     {
@@ -94,7 +94,7 @@
         "sudo ./bootstrap-jenkins-slave.sh"
       ],
       "only": [
-        "ingen-jenkins-trusty64"
+        "ingen-jenkins-bionic64"
       ]
     },
     {
@@ -103,7 +103,7 @@
         "sudo /tmp/provisioning/minimize.sh"
       ],
       "only": [
-        "ingen-base-trusty64"
+        "ingen-base-bionic64"
       ]
     }
   ],
@@ -113,17 +113,17 @@
         "type": "vagrant",
         "output": "{{.BuildName}}.v{{user `version`}}.{{.Provider}}.box",
         "only": [
-          "ingen-base-trusty64"
+          "ingen-base-bionic64"
         ]
       },
       {
         "type": "vagrant-cloud",
-        "box_tag": "ingenerator/base-trusty64",
+        "box_tag": "ingenerator/base-bionic64",
         "access_token": "{{user `vagrant_cloud_token`}}",
         "version": "{{user `version`}}",
         "no_release": true,
         "only": [
-          "ingen-base-trusty64"
+          "ingen-base-bionic64"
         ]
       }
     ]
