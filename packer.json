@@ -6,7 +6,7 @@
     "digitalocean_token": "",
     "source_ami_bionic64": "ami-08d658f84a6d84a80",
     "_source_ami_readme": "https://cloud-images.ubuntu.com/locator/ec2/ search for eu-west-1 bionic hvm:ebs",
-    "vagrant_box_path": "{{env `HOMEDRIVE`}}{{env `HOMEPATH`}}/.vagrant.d/boxes",
+    "vagrant_box_path": "{{env `HOME`}}/.vagrant.d/boxes",
     "vagrant_cloud_token": null,
     "version": null
   },
