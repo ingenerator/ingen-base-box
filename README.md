@@ -22,12 +22,11 @@ secret_vars.json in the working directory, that looks like this:
 }
 ```
 
-The virtualbox base boxes are built on top of the `hashicorp/precise64` and `ubuntu/trusty64`
-vagrant images. You will therefore need to install these locally before you can build on them.
+The virtualbox base boxes are built on top of the `bento/ubuntu-18.04`
+vagrant image. You will therefore need to install these locally before you can build on them.
 
 ```shell
-vagrant box add hashicorp/precise64
-vagrant box add ubuntu/trusty64
+vagrant box add bento/ubuntu-18.04
 ```
 
 Then to build all the boxes:
@@ -39,7 +38,7 @@ packer build --var "version=0.5.0" --var-file=secret_vars.json packer.json"
 To build a specific image, specify the name(s) in the --only parameter:
 
 ```shell
-packer build --var "version=0.5.0" --var-file=secret_vars.json --only=ingen-jenkins-trusty64 packer.json"
+packer build --var "version=0.5.0" --var-file=secret_vars.json --only=ingen-jenkins-bionic64 packer.json"
 ```
 
 ### Uploading packaged vagrant boxes

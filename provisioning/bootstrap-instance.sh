@@ -45,7 +45,8 @@ echo "Updating apt cache"
 sudo apt-get update
 
 echo "Updating base distribution packages"
-sudo apt-get upgrade -y
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade -o Dpkg::Options::="--force-confnew";
+sudo DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
 
 echo "Installing basic native packages"
 # includes native libraries required by gems to save compiling them locally

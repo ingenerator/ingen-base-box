@@ -14,10 +14,10 @@
     {
       "name": "ingen-base-bionic64",
       "type": "virtualbox-ovf",
-      "source_path": "{{user `vagrant_box_path`}}/ubuntu-VAGRANTSLASH-bionic64/20190212.1.0/virtualbox/box.ovf",
+      "source_path": "{{user `vagrant_box_path`}}/bento-VAGRANTSLASH-ubuntu-18.04/201812.27.0/virtualbox/box.ovf",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
-      "ssh_wait_timeout": "30s",
+      "ssh_wait_timeout": "1000s",
       "shutdown_command": "echo 'packer' | sudo -S shutdown -P now",
       "vboxmanage": [
         ["modifyvm", "{{.Name}}", "--memory", "1024"]
